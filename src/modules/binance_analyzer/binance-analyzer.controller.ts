@@ -21,7 +21,7 @@ export class BinanceAnalyzerController {
     description: 'Open and close time for ',
     type: BinanceAnalyzeDataOutputDTO,
   })
-  @Get('/')
+  @Get('/lowest-price')
   async get(@Query() dto: BinanceAnalyzeDataInputDTO) {
     const data = await this.binanceApi.getHistoricalData({
       symbol: dto.symbol,
