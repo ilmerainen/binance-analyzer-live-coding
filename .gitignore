@@ -12,3 +12,5 @@ yarn-error.log*
 
 .env
 dist
+.DS_Store
+.idea

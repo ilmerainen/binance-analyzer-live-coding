@@ -2,6 +2,9 @@ import {Test} from "@nestjs/testing";
 import {BinanceAPI} from "./binance-api.service";
 import {BinanceAnalyzerService} from "./binance-analyzer.service";
 
+/**
+ * Only domain logic was tested due to the time limits.
+ */
 describe('BinanceAnalyzerModule', () => {
   let binanceApi: BinanceAPI;
   let binanceAnalyzer: BinanceAnalyzerService;
@@ -17,6 +20,7 @@ describe('BinanceAnalyzerModule', () => {
 
   describe(`BinanceAnalyzerService`, () => {
     it('should return the lowest price period for historical data', () => {
+      const getPeriodForLowestPriceSpy = jest.spyOn(binanceAnalyzer, 'getPeriodForLowestPrice');
       const result = binanceAnalyzer.getPeriodForLowestPrice([
         [
           1499040000000,      // Kline open time
@@ -48,12 +52,19 @@ describe('BinanceAnalyzerModule', () => {
         ]
       ]);
 
+      expect(getPeriodForLowestPriceSpy).toHaveBeenCalledTimes(1);
       expect(result).toMatchObject({
         openTime: expect.any(Date),
         closeTime: expect.any(Date),
       });
       expect(result?.openTime.getTime()).toEqual(1499644799999);
       expect(result?.closeTime.getTime()).toEqual(1499644899999);
+    });
+
+    it('should return null if an empty array is passed', () => {
+      const result = binanceAnalyzer.getPeriodForLowestPrice([]);
+
+      expect(result).toBeNull();
     });
   })
 });
