@@ -14,11 +14,11 @@ export class BinanceAnalyzerController {
   ) {}
 
   @ApiOperation({
-    summary: 'Get the lowest price for period',
+    summary: 'Get the lowest price for time period',
   })
   @ApiResponse({
     status: HttpStatus.OK,
-    description: 'Open and close time for ',
+    description: 'Open and close time for time period',
     type: BinanceAnalyzeDataOutputDTO,
   })
   @Get('/lowest-price')
