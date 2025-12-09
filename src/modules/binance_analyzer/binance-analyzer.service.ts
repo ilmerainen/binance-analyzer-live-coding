@@ -1,15 +1,13 @@
-import {Injectable} from "@nestjs/common";
-import {Kline} from "binance";
+import { Injectable } from '@nestjs/common';
+import { Kline } from 'binance';
 
 @Injectable()
 export class BinanceAnalyzerService {
   // todo: do not use array indexes
-  getPeriodForLowestPrice(input: Kline[]): (
-    {
-      openTime: Date;
-      closeTime: Date;
-    } | null
-    ) {
+  getPeriodForLowestPrice(input: Kline[]): {
+    openTime: Date;
+    closeTime: Date;
+  } | null {
     if (input.length === 0) {
       return null;
     }
@@ -24,6 +22,6 @@ export class BinanceAnalyzerService {
     return {
       openTime: new Date(lowestKline[0]),
       closeTime: new Date(lowestKline[6]),
-    }
+    };
   }
 }

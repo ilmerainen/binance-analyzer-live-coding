@@ -1,6 +1,6 @@
-import {Injectable} from "@nestjs/common";
-import {MainClient} from "binance";
-import {KlineInterval} from "binance/lib/types/shared";
+import { Injectable } from '@nestjs/common';
+import { MainClient } from 'binance';
+import { KlineInterval } from 'binance/lib/types/shared';
 
 @Injectable()
 export class BinanceAPI {
@@ -11,11 +11,11 @@ export class BinanceAPI {
   }
 
   async getHistoricalData({
-                            symbol,
-                            interval,
-                            startTime,
-                            endTime,
-                          }: {
+    symbol,
+    interval,
+    startTime,
+    endTime,
+  }: {
     symbol: string;
     interval: KlineInterval;
     startTime?: Date;
